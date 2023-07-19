@@ -180,3 +180,7 @@
 + Added Due Report to Suppliers
 + Added Export PDF to all reports
 + Small Bug fixes
+
+# Fuente
+
+https://www.campcodes.com/projects/php/complete-pos-management-and-inventory-system-in-php-mysql/ 
