@@ -196,3 +196,7 @@ For any issues or questions, please refer to the documentation or create an issu
 ## License
 
 This project is licensed under the MIT License.
+
+## Source
+
+https://www.campcodes.com/projects/php/complete-pos-management-and-inventory-system-in-php-mysql/
