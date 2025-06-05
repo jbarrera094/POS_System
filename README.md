@@ -1,186 +1,198 @@
-# Version 1.1 - 07-04-2021
+# POS Management and Inventory System
 
--   Updated : bug Fixed in backup
--   Added : Support IE
+A complete Point of Sale (POS) and Inventory Management System built with Laravel 8.
 
-# Version 1.2 - 08-04-2021
+![POS Dashboard](./public/images/pos_dashboard_shot.webp)
 
--   Added : Footer Dynamic
--   Added : Instruction Installation In Localhost
--   Updated : Changing the Database Structure
--   Updated : bug Fixed in dark mode
--   Updated : bug Fixed in Edit Payment
+## Server Requirements
 
-# Version 1.3 - 10-04-2021
+-   PHP >= 7.3.0
+-   MySQL 5.x or higher
+-   BCMath PHP Extension
+-   Ctype PHP Extension
+-   Fileinfo PHP Extension
+-   GD2 PHP Extension
+-   JSON PHP Extension
+-   Mbstring PHP Extension
+-   OpenSSL PHP Extension
+-   PDO PHP Extension
+-   Tokenizer PHP Extension
+-   XML PHP Extension
 
--   Updated : Improve Code
--   Updated : Improve security
+## Installation Steps
 
-# Version 1.4 - 12-04-2021
+### 1. Clone the Repository
 
--   Added : Updated Guide
--   Updated : Fixed dropdown in purchases
--   Updated : Fixed Import Products by csv
+```bash
+git clone [repository-url]
+cd [project-directory]
+```
 
-# Version 2.0 - 21-04-2021
+### 2. Install Dependencies
 
--   Updated : Improve security
--   Added : Integration Payment Gateway ( Stripe)
--   Updated : Upgrade to laravel 8 (Support php 8)
--   Updated : The new minimum PHP version is now 7.3.0.
--   Added : Filter By Date for all reports
+```bash
+composer install
+npm install
+```
 
-# Version 2.1.0 - 22-04-2021
+### 3. Environment Setup
 
--   Updated : Improve security
--   Updated : Fix bug Duplicate User & Customer & Product Code
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-# Version 2.2.0 - 02-05-2021
+### 4. Configure Database
 
--   Added : SMS API (Twilio)
--   Added : Footer Dynamic
--   Updated : Fix bug in Password Database
--   Updated : Fix bug in Stock Alert
+Edit the `.env` file and set your database credentials:
 
-# Version 2.3.0 - 18-05-2021
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+```
 
--   Added : Default Customer & Warehouse in POS
--   Updated : Fix bug in editing Variants Product
+### 5. Run Migrations and Seeders
 
-# Version 2.4.0 - 02-06-2021
+```bash
+php artisan migrate --seed
+```
 
--   Added : Add Sale Date in invoice
--   Updated :  Fix Duplicated product in import
--   Updated :  Fix Minor bugs
+### 6. Create Storage Link
 
-# Version 2.5.0 - 08-06-2021
+```bash
+php artisan storage:link
+```
 
--   Updated :  Fix POS Receipt Printer
+### 7. Compile Assets
 
-# Version 3.0.0 - 25-06-2021
+```bash
+npm run dev
+```
 
--   Added  :  Barcode Scanner in POS
--   Updated :  Fix bug in Import Product
--   Updated :  Fix bug in download file
--   Updated :  Updated Iconsmind
+### 8. Set Permissions
 
-# Version 3.1.0 - 28-06-2021
+```bash
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+```
 
--   Updated :  Minor bug fixes
+### 9. Configure Web Server
 
-# Version 3.2.0 - 30-06-2021
+#### For Apache:
 
--   Updated : Fix bug in download pdf (Support php 8)
--   Added  : Clearing cache with a click of a button
--   Updated : Fix bug in Import Product (without create warehouse)
--   Updated : Change currency symbol from the right to the left
--   Added  : Video in documentation showing you the steps on how to upgrade stocky
--   Updated : Minor bug fixes
+Create a virtual host configuration:
 
-# Version 3.3.0 - 06-07-2021
+```apache
+<VirtualHost pos.local:80>
+    ServerAdmin webmaster@pos.local
+    DocumentRoot "/path/to/your/project/public"
+    ServerName www.pos.local
+    ServerAlias pos.local
 
--   Added  :  Add the ability to enter the BarCode manually
--   Added  :  Barcode Scanner (All Operations)
--   Updated :  Fix bug in barcode printing
--   Added  :  Paper Size for printing barcode labels
--   Updated :  Correct some words in Spanish translation
--   Updated :  Fix bug in Editing Variants
--   Updated :  Fix bug in generate backup
--   Updated :  Improve security
--   Updated :  Documentation Updated
--   Updated :  Minor bug fixes
+    <Directory "/path/to/your/project/public">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
 
-# Version 3.3.1 - 06-07-2021
+    ErrorLog "logs/pos.local-error.log"
+    CustomLog "logs/pos.local-access.log" common
+</VirtualHost>
+```
 
--   Fixed  :  Fix bug in pos
+**Note:** After creating the virtual host configuration:
 
-# Version 3.3.2 - 12-07-2021
+1. Add the following line to your hosts file (`/etc/hosts` on Linux/Mac or `C:\Windows\System32\drivers\etc\hosts` on Windows):
 
--   Fixed  :  bug in pos
--   Fixed  :  Design & Size receipt pos for thermal receipt printer
--   Fixed  :  Currency symbol Dynamic in input fields
--   Fixed  :  Bug Duplicate save data when click more than one times
+```
+127.0.0.1 pos.local www.pos.local
+```
 
-# Version 3.4.0 - 29-07-2021
+2. Restart Apache server
 
--   Added    :  Server requirements in Installation
--   Added    :  Automatically increase quantity in POS when scanning items
--   Added    :  option to choose unit when create Transaction
--   Added    :  Paid Amount & due Amount in pos receipt
--   Fixed    :  Show Items in dashboard with permissions
--   Fixed    :  if Transaction deleted the stock return to previous status
--   Fixed    :  Profit Calculation based by (price & cost)
--   Fixed    :  Report Profit And Loss
--   Fixed    :  Bug in editing Transaction 
--   Fixed    :  Bug in Units
--   Updated  :  Improve security
--   Updated  :  Documentation Updated
+#### For Nginx:
 
-# Version 3.5.0 - 02-08-2021
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /path/to/project/public;
 
--   Added    :  Cost of goods sold formula implemented to calculate profit
--   Added    :  received & paying Amount & change
--   Fixed    :  bug in calculate Due Amount
--   Fixed    :  migration database
--   Fixed    :  Minor bug fixes
--   Updated  :  pos receipt
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
 
-# Version 3.6.0 - 08-08-2021
+    index index.php;
 
--   Fixed    :  Minor bug fixes
--   Updated  :  Documentation Updated
+    charset utf-8;
 
-# Version 3.7.0 - 26-09-2021
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
 
--   Added    :  Choose default language from area settings
--   Added    :  Pos Settings
--   Fixed    :  bug in twillio SMS
--   Updated  :  Hide Documentation from sidebar
--   Updated  :  Improve performance
--   Updated  :  Documentation Updated
--   Fixed    :  bug fixes
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
 
+    error_page 404 /index.php;
 
-# Version 3.8.0 - 28-10-2021
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
 
--   Updated  :  Report profit
--   Updated  :  Update stock without purchase product
--   Fixed    :  Bug fixes
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
 
-# Version 3.9.0 - 01-01-2022
+### 10. Default Login Credentials
 
-- Added    :  Add Korean language
-- Added    :  Add Paid Amount & Due on pdf
-- Added    :  Add Note on Detail transaction
-- Fixed    :  Search box fixed
-- Fixed    :  Bug fixes
+After installation, you can log in with these default credentials:
 
-# Version 4.0.0 - 11-04-2022
+-   Email: admin@example.com
+-   Password: 123456
 
-+ Added ability to assign warehouses to users
-+ Added Module HRM
-+ Added multi reports
-+ Added Date Range in all reports
-+ Update all the Node.js dependencies to their latest version
-+ Documentation Updated
-+ Fix issue in search box not working properly on mobile
-+ Fix Print CSS
-+ Make fields optional for Customers & Providers
-+ Fixed npm install
-+ Small Bug fixes
+**Important:** Change these credentials immediately after first login.
 
-# Version 4.0.1
+## Features
 
-+ Added Warranty Management (IMEI & SERIAL NUMBERS)
-+ Added Delivery Management
-+ Added ability to assign warehouses to users
-+ Added Users Report
-+ Added Stock Report
-+ Added Due Report to Customers
-+ Added Due Report to Suppliers
-+ Added Export PDF to all reports
-+ Small Bug fixes
+-   Easy POS and Dynamic dashboard
+-   Items, Adjustment, Transfer management
+-   Quotations, Sales, Purchases tracking
+-   Returns Customer & Supplier management
+-   Users, Customers, Suppliers management
+-   Currency, Units, Category management
+-   Payment Sales & Purchases tracking
+-   Payments Report generation
+-   Overview & warehouse stock charts
+-   Purchases & Sales reports
+-   Customers & suppliers reports
+-   Product quantity alerts
+-   Mail notification system
+-   Dark Version Included
+-   Multilingual support (14 languages)
+-   RTL Support
+-   Pure Vue.js implementation
+-   Clean and organized code structure
 
-# Fuente
+## Security Features
 
-https://www.campcodes.com/projects/php/complete-pos-management-and-inventory-system-in-php-mysql/ 
+-   CSRF Protection
+-   XSS Protection
+-   SQL Injection Prevention
+-   Prepared Statements
+-   Secure Authentication
+-   Role-based Access Control
+
+## Support
+
+For any issues or questions, please refer to the documentation or create an issue in the repository.
+
+## License
+
+This project is licensed under the MIT License.
