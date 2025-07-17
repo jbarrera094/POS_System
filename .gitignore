@@ -7,7 +7,8 @@
 /public/hot
 /public/storage
 /storage/*.key
-/storage/framework/sessions
+/storage/framework/sessions/*
+!/storage/framework/sessions/.dummy
 /vendor
 .env
 .env.backup
