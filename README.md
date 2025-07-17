@@ -30,6 +30,8 @@ cd [project-directory]
 
 ### 2. Install Dependencies
 
+Note: use node v14.21.3
+
 ```bash
 composer install
 npm install
